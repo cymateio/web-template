@@ -1,0 +1,10 @@
+# GENERAL SETTINGS
+base_url: "https://identity.getpostman.com/login"
+
+# NUMBER OF PROCESSES - Need to be in string format
+num_processes: "1"
+
+# PATH TO DIRECTORIES
+test_dir: "src/main/python/company-template/tests"
+conftest_dir: "src/main/python/company-template/tests"
+
