@@ -4,17 +4,16 @@ from selenium.webdriver.chrome.options import Options
 from utils.utilities import *
 
 
-class BaseTest():
-
+class BaseTest:
     def setup_method(self):
         chrome_options = Options()
         chrome_options.add_experimental_option("detach", True)
 
         self.config = self.read_config()
         base_url = get_base_url(self.config)
-        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.get(base_url)
-    
+
     def teardown_method(self):
         self.driver.quit()
 

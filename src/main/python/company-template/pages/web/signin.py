@@ -1,8 +1,8 @@
 from selenium import webdriver
 from pages.base.base_signin import BaseSignin
 
-class Signin(BaseSignin):
 
+class Signin(BaseSignin):
     textbox_username = "username"
     textbox_password = "password"
     button_signin = "//*[@id='sign-in-btn']"
@@ -20,8 +20,6 @@ class Signin(BaseSignin):
 
     def set_password(self, password):
         self.driver.find_element("id", self.textbox_password).send_keys(password)
-    
+
     def click_signin(self):
         self.driver.find_element("xpath", self.button_signin).click()
-
-    

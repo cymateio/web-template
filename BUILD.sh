@@ -1,7 +1,6 @@
 ### ACTIVATE VIRTUAL ENV
 source venv/bin/activate
 
-
 ### EXPORT PYTHONPATH
 export PYTHONPATH=$(python3 src/main/python/company-template/utils/get_pythonpath.py)
 echo $PYTHONPATH

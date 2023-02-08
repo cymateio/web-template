@@ -6,8 +6,8 @@ from pages.web.signin import Signin
 
 from utils.utilities import *
 
-class TestLogin(BaseTest):
 
+class TestLogin(BaseTest):
     @pytest.mark.functional
     def test_LoginToPageAndCheckTitle(self):
         signin_page = Signin(self.driver)

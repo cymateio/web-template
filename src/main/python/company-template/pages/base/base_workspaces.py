@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractclassmethod
 
-class BaseWorkspaces(metaclass=ABCMeta):
 
+class BaseWorkspaces(metaclass=ABCMeta):
     @abstractclassmethod
     def __init__(self, driver) -> None:
         self.driver = driver

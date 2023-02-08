@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractclassmethod
 
-class BaseMain(metaclass=ABCMeta):
 
+class BaseMain(metaclass=ABCMeta):
     @abstractclassmethod
     def __init__(self, driver) -> None:
         self.driver = driver

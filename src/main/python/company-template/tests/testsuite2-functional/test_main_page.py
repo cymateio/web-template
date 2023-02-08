@@ -6,8 +6,8 @@ from pages.web.main import Main
 
 from utils.utilities import *
 
-class TestLogin(BaseTest):
 
+class TestLogin(BaseTest):
     @pytest.mark.functional
     def test_NavigatingToWorkspacesFromMain(self):
         signin_page = Signin(self.driver)

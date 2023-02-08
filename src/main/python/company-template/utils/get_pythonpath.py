@@ -8,9 +8,9 @@ def print_pythonpath():
         "src/main/python/company-template",
         "src/main/python/company-template/pages",
         "src/main/python/company-template/tests",
-        "src/main/python/company-template/utils"
+        "src/main/python/company-template/utils",
     ]
-    print("$PYTHONPATH:"+":".join([basepath+i for i in all_paths]))
+    print("$PYTHONPATH:" + ":".join([basepath + i for i in all_paths]))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractclassmethod
 
-class BaseSignin(metaclass=ABCMeta):
 
+class BaseSignin(metaclass=ABCMeta):
     @abstractclassmethod
     def __init__(self, driver) -> None:
         self.driver = driver
@@ -17,7 +17,7 @@ class BaseSignin(metaclass=ABCMeta):
     @abstractclassmethod
     def set_password(self, password):
         pass
-    
+
     @abstractclassmethod
     def click_signin(self):
         pass

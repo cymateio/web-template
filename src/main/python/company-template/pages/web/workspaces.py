@@ -8,9 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Workspaces(BaseWorkspaces):
     dropdown_collection = "//*[@id='app-root']/div/div/div[6]/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/div/div/div[1]"
-    span_api = "//*[@id='app-root']/div/div/div[6]/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]" 
+    span_api = "//*[@id='app-root']/div/div/div[6]/div[1]/div[1]/div/div/div/div[1]/div[1]/div/div/div[2]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]"
     button_send = "//*[@id='app-root']/div/div/div[6]/div[1]/div[1]/div/div/div/div[2]/div/div/div/div[2]/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div/div/div/div/div[1]"
-    
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -33,7 +32,6 @@ class Workspaces(BaseWorkspaces):
         self.driver.find_element("xpath", self.button_send).click()
 
     def wait_for_element_to_load(self, element):
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.XPATH, element)))
-        
-
-    
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, element))
+        )
