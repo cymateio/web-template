@@ -3,6 +3,6 @@ venv
 .pytest_cache
 **/__pycache__/
 **/test-output/logs/*
-**/test-output/outputs/*
+**/test-output/results/*
 **/test-output/reports/*
 **/test-output/reports/assets/
