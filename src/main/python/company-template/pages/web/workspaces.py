@@ -32,6 +32,6 @@ class Workspaces(BaseWorkspaces):
         self.driver.find_element("xpath", self.button_send).click()
 
     def wait_for_element_to_load(self, element):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 50).until(
             EC.visibility_of_element_located((By.XPATH, element))
         )

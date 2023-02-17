@@ -20,11 +20,11 @@ class Main(BaseMain):
         self.driver.find_element("xpath", self.span_myworkspaces).click()
 
     def wait_for_dropdown_to_load(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 50).until(
             EC.visibility_of_element_located((By.XPATH, self.dropdown_workspaces))
         )
 
     def wait_for_span_to_load(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 50).until(
             EC.visibility_of_element_located((By.XPATH, self.span_myworkspaces))
         )

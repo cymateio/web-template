@@ -11,7 +11,7 @@ class TestLogin(BaseTest):
     @pytest.mark.functional
     def test_NavigatingToWorkspacesFromMain(self):
         signin_page = Signin(self.driver)
-        user_data = get_user_data(self.config)
+        user_data = self.config["user"]
         signin_page.signin(user_data["username"], user_data["password"])
 
         main_page = Main(self.driver)

@@ -1,0 +1,210 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-7.2.1, pluggy-1.0.0
+rootdir: /Users/wesleyhoang/Desktop/code/cymate-template/web-template
+plugins: xdist-3.1.0, html-3.2.0, metadata-2.0.4
+gw0 I / gw1 I
+[gw0] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+[gw1] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+gw0 [7] / gw1 [7]
+
+scheduling tests via LoadFileScheduling
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+[gw0] [ 14%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+[gw0] [ 28%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw0] [ 42%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw1] [ 57%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+[gw1] [ 71%] FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw1] [ 85%] FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw0] [100%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+
+=================================== FAILURES ===================================
+__________________________________ test_main ___________________________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+
+driver = <selenium.webdriver.remote.webdriver.WebDriver (session="3a0ceba64f16417581430f4d98e0f1c9")>
+logger = <Logger conftest (INFO)>
+
+    @pytest.mark.smoke
+    @pytest.mark.dependency(depends=["test_signin"])
+    def test_main(driver, logger):
+        logger.info('1 main info')
+        logger.info('2 main info')
+        logger.info('3 main info')
+        main_page = Main(driver)
+>       main_page.navigate_workspace()
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/main/python/company-template/pages/web/main.py:17: in navigate_workspace
+    self.wait_for_dropdown_to_load()
+src/main/python/company-template/pages/web/main.py:23: in wait_for_dropdown_to_load
+    WebDriverWait(self.driver, 10).until(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="3a0ceba64f16417581430f4d98e0f1c9")>
+method = <function visibility_of_element_located.<locals>._predicate at 0x107f8a3b0>
+message = ''
+
+    def until(self, method, message: str = ""):
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       Backtrace:
+E       	Ordinal0 [0x00A3C0C3+3326147]
+E       	Ordinal0 [0x00920851+2164817]
+E       	Ordinal0 [0x007A7298+619160]
+E       	Ordinal0 [0x0072C070+114800]
+E       	Ordinal0 [0x0074FC42+261186]
+E       	Ordinal0 [0x00741A2A+203306]
+E       	Ordinal0 [0x0074E559+255321]
+E       	Ordinal0 [0x0074189B+202907]
+E       	Ordinal0 [0x00723DF4+81396]
+E       	Ordinal0 [0x00724DEE+85486]
+E       	Ordinal0 [0x00724D79+85369]
+E       	Ordinal0 [0x009385DC+2262492]
+E       	GetHandleVerifier [0x00BC2874+1487204]
+E       	GetHandleVerifier [0x00BC23CD+1486013]
+E       	GetHandleVerifier [0x00BCA368+1518680]
+E       	GetHandleVerifier [0x00BC2F4E+1488958]
+E       	Ordinal0 [0x0092ED0D+2223373]
+E       	Ordinal0 [0x0093A12B+2269483]
+E       	Ordinal0 [0x0093A26F+2269807]
+E       	Ordinal0 [0x0094ECB8+2354360]
+E       	BaseThreadInitThunk [0x765F6739+25]
+E       	RtlGetFullPathName_UEx [0x77A98AFF+1215]
+E       	RtlGetFullPathName_UEx [0x77A98ACD+1165]
+
+venv/lib/python3.10/site-packages/selenium/webdriver/support/wait.py:95: TimeoutException
+------------------------------ Captured log setup ------------------------------
+2906 - 18:40:04 - INFO - 1 ==================================== STARTING TEST: test_main
+2906 - 18:40:04 - INFO - 2 ==================================== STARTING TEST: test_main
+2906 - 18:40:04 - INFO - 3 ==================================== STARTING TEST: test_main
+------------------------------ Captured log call -------------------------------
+2906 - 18:40:04 - INFO - 1 main info
+2906 - 18:40:04 - INFO - 2 main info
+2906 - 18:40:04 - INFO - 3 main info
+________________________________ test_workspace ________________________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+
+driver = <selenium.webdriver.remote.webdriver.WebDriver (session="3a0ceba64f16417581430f4d98e0f1c9")>
+logger = <Logger conftest (INFO)>
+
+    @pytest.mark.smoke
+    @pytest.mark.dependency(depends=["test_main"])
+    def test_workspace(driver, logger):
+        logger.info('1 workspaces info')
+        logger.info('2 workspaces info')
+        logger.info('3 workspaces info')
+        workspaces_page = Workspaces(driver)
+>       workspaces_page.send_api()
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/main/python/company-template/pages/web/workspaces.py:18: in send_api
+    self.click_collection()
+src/main/python/company-template/pages/web/workspaces.py:23: in click_collection
+    self.wait_for_element_to_load(self.dropdown_collection)
+src/main/python/company-template/pages/web/workspaces.py:35: in wait_for_element_to_load
+    WebDriverWait(self.driver, 10).until(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.support.wait.WebDriverWait (session="3a0ceba64f16417581430f4d98e0f1c9")>
+method = <function visibility_of_element_located.<locals>._predicate at 0x107f8a320>
+message = ''
+
+    def until(self, method, message: str = ""):
+        """Calls the method provided with the driver as an argument until the \
+        return value does not evaluate to ``False``.
+    
+        :param method: callable(WebDriver)
+        :param message: optional message for :exc:`TimeoutException`
+        :returns: the result of the last call to `method`
+        :raises: :exc:`selenium.common.exceptions.TimeoutException` if timeout occurs
+        """
+        screen = None
+        stacktrace = None
+    
+        end_time = time.monotonic() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, "screen", None)
+                stacktrace = getattr(exc, "stacktrace", None)
+            time.sleep(self._poll)
+            if time.monotonic() > end_time:
+                break
+>       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message: 
+E       Stacktrace:
+E       Backtrace:
+E       	Ordinal0 [0x00A3C0C3+3326147]
+E       	Ordinal0 [0x00920851+2164817]
+E       	Ordinal0 [0x007A7298+619160]
+E       	Ordinal0 [0x0072C070+114800]
+E       	Ordinal0 [0x0074FC42+261186]
+E       	Ordinal0 [0x00741A2A+203306]
+E       	Ordinal0 [0x0074E559+255321]
+E       	Ordinal0 [0x0074189B+202907]
+E       	Ordinal0 [0x00723DF4+81396]
+E       	Ordinal0 [0x00724DEE+85486]
+E       	Ordinal0 [0x00724D79+85369]
+E       	Ordinal0 [0x009385DC+2262492]
+E       	GetHandleVerifier [0x00BC2874+1487204]
+E       	GetHandleVerifier [0x00BC23CD+1486013]
+E       	GetHandleVerifier [0x00BCA368+1518680]
+E       	GetHandleVerifier [0x00BC2F4E+1488958]
+E       	Ordinal0 [0x0092ED0D+2223373]
+E       	Ordinal0 [0x0093A12B+2269483]
+E       	Ordinal0 [0x0093A26F+2269807]
+E       	Ordinal0 [0x0094ECB8+2354360]
+E       	BaseThreadInitThunk [0x765F6739+25]
+E       	RtlGetFullPathName_UEx [0x77A98AFF+1215]
+E       	RtlGetFullPathName_UEx [0x77A98ACD+1165]
+
+venv/lib/python3.10/site-packages/selenium/webdriver/support/wait.py:95: TimeoutException
+------------------------------ Captured log setup ------------------------------
+2906 - 18:40:14 - INFO - 1 ==================================== STARTING TEST: test_workspace
+2906 - 18:40:14 - INFO - 2 ==================================== STARTING TEST: test_workspace
+2906 - 18:40:14 - INFO - 3 ==================================== STARTING TEST: test_workspace
+------------------------------ Captured log call -------------------------------
+2906 - 18:40:14 - INFO - 1 workspaces info
+2906 - 18:40:14 - INFO - 2 workspaces info
+2906 - 18:40:14 - INFO - 3 workspaces info
+- generated html file: file:///Users/wesleyhoang/Desktop/code/cymate-template/web-template/test-output/reports/report_2023-02-16_18-39-49.html -
+=========================== short test summary info ============================
+FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main
+FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace
+========================= 2 failed, 5 passed in 42.03s =========================

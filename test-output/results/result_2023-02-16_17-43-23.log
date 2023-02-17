@@ -1,0 +1,245 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-7.2.1, pluggy-1.0.0
+rootdir: /Users/wesleyhoang/Desktop/code/cymate-template/web-template
+plugins: xdist-3.1.0, html-3.2.0, metadata-2.0.4
+gw0 I / gw1 I
+[gw0] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+[gw1] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+gw0 [7] / gw1 [7]
+
+scheduling tests via LoadFileScheduling
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+[gw0] [ 14%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+[gw0] [ 28%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw0] [ 42%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw1] [ 57%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw1] [ 71%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw0] [ 85%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw1] [100%] FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+
+=================================== FAILURES ===================================
+________________________________ test_workspace ________________________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+
+driver = <selenium.webdriver.chrome.webdriver.WebDriver (session="8f9854bfb57d4e4cdf876a1580883835")>
+logger = <Logger conftest (INFO)>
+
+    @pytest.mark.smoke
+    @pytest.mark.dependency(depends=["test_main"])
+    def test_workspace(driver, logger):
+        logger.info('1 workspaces info')
+        logger.info('2 workspaces info')
+        logger.info('3 workspaces info')
+        workspaces_page = Workspaces(driver)
+>       workspaces_page.send_api()
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/main/python/company-template/pages/web/workspaces.py:20: in send_api
+    self.click_send()
+src/main/python/company-template/pages/web/workspaces.py:31: in click_send
+    self.wait_for_element_to_load(self.button_send)
+src/main/python/company-template/pages/web/workspaces.py:35: in wait_for_element_to_load
+    WebDriverWait(self.driver, 10).until(
+venv/lib/python3.10/site-packages/selenium/webdriver/support/wait.py:86: in until
+    value = method(self._driver)
+venv/lib/python3.10/site-packages/selenium/webdriver/support/expected_conditions.py:139: in _predicate
+    return _element_if_visible(driver.find_element(*locator))
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:830: in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:440: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x110f05720>
+response = {'status': 404, 'value': '{"value":{"error":"no such window","message":"no such window: target window already closed\\...fff6bcc1109 _pthread_start + 148\\n18  libsystem_pthread.dylib             0x00007fff6bcbcb8b thread_start + 15\\n"}}'}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """Checks that a JSON response from the WebDriver does not have an
+        error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif (
+            status in ErrorCode.INVALID_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER
+        ):
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+            raise exception_class(value)
+        if message == "" and "message" in value:
+            message = value["message"]
+    
+        screen = None  # type: ignore[assignment]
+        if "screen" in value:
+            screen = value["screen"]
+    
+        stacktrace = None
+        st_value = value.get("stackTrace") or value.get("stacktrace")
+        if st_value:
+            if isinstance(st_value, str):
+                stacktrace = st_value.split("\n")
+            else:
+                stacktrace = []
+                try:
+                    for frame in st_value:
+                        line = frame.get("lineNumber", "")
+                        file = frame.get("fileName", "<anonymous>")
+                        if line:
+                            file = f"{file}:{line}"
+                        meth = frame.get("methodName", "<anonymous>")
+                        if "className" in frame:
+                            meth = f"{frame['className']}.{meth}"
+                        msg = "    at %s (%s)"
+                        msg = msg % (meth, file)
+                        stacktrace.append(msg)
+                except TypeError:
+                    pass
+        if exception_class == UnexpectedAlertPresentException:
+            alert_text = None
+            if "data" in value:
+                alert_text = value["data"].get("text")
+            elif "alert" in value:
+                alert_text = value["alert"].get("text")
+            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+E       from unknown error: web view not found
+E         (Session info: chrome=110.0.5481.100)
+E       Stacktrace:
+E       0   chromedriver                        0x0000000102e15138 chromedriver + 4923704
+E       1   chromedriver                        0x0000000102d8d9d3 chromedriver + 4368851
+E       2   chromedriver                        0x00000001029d6787 chromedriver + 472967
+E       3   chromedriver                        0x00000001029acc15 chromedriver + 302101
+E       4   chromedriver                        0x0000000102a494cf chromedriver + 943311
+E       5   chromedriver                        0x0000000102a5e2c6 chromedriver + 1028806
+E       6   chromedriver                        0x0000000102a43d23 chromedriver + 920867
+E       7   chromedriver                        0x0000000102a0aa4b chromedriver + 686667
+E       8   chromedriver                        0x0000000102a0c044 chromedriver + 692292
+E       9   chromedriver                        0x0000000102de08fe chromedriver + 4708606
+E       10  chromedriver                        0x0000000102de5e22 chromedriver + 4730402
+E       11  chromedriver                        0x0000000102dee6bf chromedriver + 4765375
+E       12  chromedriver                        0x0000000102de6e80 chromedriver + 4734592
+E       13  chromedriver                        0x0000000102db7975 chromedriver + 4540789
+E       14  chromedriver                        0x0000000102e08e78 chromedriver + 4873848
+E       15  chromedriver                        0x0000000102e08ff5 chromedriver + 4874229
+E       16  chromedriver                        0x0000000102e1d6de chromedriver + 4957918
+E       17  libsystem_pthread.dylib             0x00007fff6bcc1109 _pthread_start + 148
+E       18  libsystem_pthread.dylib             0x00007fff6bcbcb8b thread_start + 15
+
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py:245: NoSuchWindowException
+------------------------------ Captured log setup ------------------------------
+98527 - 17:43:32 - INFO - 1 ==================================== STARTING TEST: test_workspace
+98527 - 17:43:32 - INFO - 2 ==================================== STARTING TEST: test_workspace
+98527 - 17:43:32 - INFO - 3 ==================================== STARTING TEST: test_workspace
+------------------------------ Captured log call -------------------------------
+98527 - 17:43:32 - INFO - 1 workspaces info
+98527 - 17:43:32 - INFO - 2 workspaces info
+98527 - 17:43:32 - INFO - 3 workspaces info
+- generated html file: file:///Users/wesleyhoang/Desktop/code/cymate-template/web-template/test-output/reports/report_2023-02-16_17-43-23.html -
+=========================== short test summary info ============================
+FAILED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace
+========================= 1 failed, 6 passed in 18.04s =========================

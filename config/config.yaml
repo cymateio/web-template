@@ -1,10 +1,34 @@
+# ENVIRONMENT (local/saucelabs)
+env: "local"
+
 # GENERAL SETTINGS
 base_url: "https://identity.getpostman.com/login"
 
 # NUMBER OF PROCESSES - Need to be in string format
-num_processes: "1"
+num_processes: "2" # n, logical, auto
 
 # PATH TO DIRECTORIES
 test_dir: "src/main/python/company-template/tests"
 conftest_dir: "src/main/python/company-template/tests"
 
+# SAUCELABS
+saucelabs_username: "oauth-wesleyhoang96-6c268"
+saucelabs_accesskey: "23d77e3d-75ac-4d04-80cf-966f6ab0c98d"
+
+# CAPABILITIES
+capabilities:
+  browserName: "chrome"
+  browserVersion: "87.0"
+  platformName: "Windows 11"
+  sauce:options:
+    name: "UNNAMED"
+
+# IGNORE WARNING - Set to false while debugging to show error message
+ignore-warning: "True"
+
+# LOGGING
+log-level: "INFO" # NOTSET / DEBUG / INFO / WARNING / ERROR / CRITICAL
+log-cli: "TRUE" # log into terminal, only applicable if the number of processes is 1
+
+# DISTMDOE
+distmode: "loadfile" # each / load / loadscope / loadfile / loadgroup 

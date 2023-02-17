@@ -1,0 +1,75 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-7.2.1, pluggy-1.0.0
+rootdir: /Users/wesleyhoang/Desktop/code/cymate-template/web-template
+plugins: xdist-3.1.0, html-3.2.0, metadata-2.0.4
+gw0 I / gw1 I
+[gw0] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+[gw1] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+gw0 [7] / gw1 [7]
+
+scheduling tests via LoadFileScheduling
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+[gw0] [ 14%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+[gw1] [ 28%] ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+[gw0] [ 42%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw1] [ 57%] ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw1] [ 71%] ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw0] [ 85%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw0] [100%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+
+==================================== ERRORS ====================================
+________________________ ERROR at setup of test_signin _________________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py, line 24
+  @pytest.mark.smoke
+  @pytest.mark.dependency
+  def test_signin(driver, logger, config):
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py, line 182
+  @pytest.fixture(scope="session")
+  def driver(request, item, nextitem):
+E       fixture 'item' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, doctest_namespace, driver, extra, include_metadata_in_junit_xml, log_testname, logger, metadata, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, testrun_uid, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, worker_id
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py:182
+_________________________ ERROR at setup of test_main __________________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py, line 41
+  @pytest.mark.smoke
+  @pytest.mark.dependency(depends=["test_signin"])
+  def test_main(driver, logger):
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py, line 182
+  @pytest.fixture(scope="session")
+  def driver(request, item, nextitem):
+E       fixture 'item' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, doctest_namespace, driver, extra, include_metadata_in_junit_xml, log_testname, logger, metadata, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, testrun_uid, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, worker_id
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py:182
+_______________________ ERROR at setup of test_workspace _______________________
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py, line 52
+  @pytest.mark.smoke
+  @pytest.mark.dependency(depends=["test_main"])
+  def test_workspace(driver, logger):
+file /Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py, line 182
+  @pytest.fixture(scope="session")
+  def driver(request, item, nextitem):
+E       fixture 'item' not found
+>       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, config, doctest_namespace, driver, extra, include_metadata_in_junit_xml, log_testname, logger, metadata, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, testrun_uid, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, worker_id
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/Users/wesleyhoang/Desktop/code/cymate-template/web-template/src/main/python/company-template/tests/conftest.py:182
+- generated html file: file:///Users/wesleyhoang/Desktop/code/cymate-template/web-template/test-output/reports/report_2023-02-16_21-08-38.html -
+=========================== short test summary info ============================
+ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin
+ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main
+ERROR src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace
+========================= 4 passed, 3 errors in 12.81s =========================

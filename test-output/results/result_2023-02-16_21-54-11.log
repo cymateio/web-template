@@ -1,0 +1,396 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.10.0, pytest-7.2.1, pluggy-1.0.0
+rootdir: /Users/wesleyhoang/Desktop/code/cymate-template/web-template
+plugins: xdist-3.1.0, html-3.2.0, metadata-2.0.4
+gw0 I / gw1 I
+[gw0] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+[gw1] Python 3.10.0 (v3.10.0:b494f5935c, Oct  4 2021, 14:59:20) [Clang 12.0.5 (clang-1205.0.22.11)]
+gw0 [10] / gw1 [10]
+
+scheduling tests via LoadFileScheduling
+
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+[gw0] [ 10%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_one 
+src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+[gw0] [ 20%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_smoke.py::test_smoke_two 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_signin 
+[gw0] [ 30%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_main 
+[gw1] [ 40%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_signin 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+[gw0] [ 50%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_main 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_workspace 
+[gw1] [ 60%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_main 
+src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+[gw0] [ 70%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow2.py::test_workspace 
+src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw1] [ 80%] PASSED src/main/python/company-template/tests/testsuite1-smoke/test_workflow.py::test_workspace 
+src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw0] [ 90%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw0] [ 90%] ERROR src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle 
+[gw1] [100%] PASSED src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+[gw1] [100%] ERROR src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain 
+
+==================================== ERRORS ====================================
+_________ ERROR at teardown of TestLogin.test_LoginToPageAndCheckTitle _________
+[gw0] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+[gw0] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3[gw0] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3[gw0] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+
+request = <SubRequest 'driver' for <Function test_smoke_one>>
+
+    @pytest.fixture(scope="session")
+    def driver(request):
+    
+        config = get_config(request)
+        test_name = request.node.name
+    
+        if config["env"] == "saucelabs":
+            _credentials = config["saucelabs_username"]+":"+config["saucelabs_accesskey"]
+            _url = "https://" + _credentials + "@ondemand.saucelabs.com/wd/hub"
+            config["capabilities"]["sauce:options"]["name"] = test_name
+            driver = webdriver.Remote(_url, config["capabilities"])
+        else:
+            chrome_options = Options()
+            chrome_options.add_experimental_option("detach", True)
+            driver = webdriver.Chrome(options=chrome_options)
+    
+        # def quit():
+        #     sauce_result = "passed"
+        #     if request.node.rep_setup.failed:
+        #         sauce_result = "failed"
+        #     elif request.node.rep_setup.passed:
+        #         if request.node.rep_call.failed:
+        #             sauce_result = "failed"
+    
+        #     # sauce_result = "failed" if request.node.rep_call.failed else "passed"
+        #     driver.execute_script("sauce:job-result={}".format(sauce_result))
+        #     driver.quit()
+    
+        base_url = config["base_url"]
+        driver.get(base_url)
+    
+        # request.addfinalizer(quit)
+        yield driver
+>       driver.quit()
+
+src/main/python/company-template/tests/conftest.py:221: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:562: in quit
+    self.execute(Command.QUIT)
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:440: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x10e75f970>
+response = {'status': 404, 'value': "ERROR The test with session id 21383da8810f45d88a06ca610b6fa38d has already finished, and ca...labs.com/tests/21383da8810f45d88a06ca610b6fa38d\nFor help, please check https://docs.saucelabs.com/dev/error-messages"}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """Checks that a JSON response from the WebDriver does not have an
+        error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif (
+            status in ErrorCode.INVALID_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER
+        ):
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+>           raise exception_class(value)
+E           selenium.common.exceptions.WebDriverException: Message: ERROR The test with session id 21383da8810f45d88a06ca610b6fa38d has already finished, and can't receive further commands.
+E           You can learn more at https://app.saucelabs.com/tests/21383da8810f45d88a06ca610b6fa38d
+E           For help, please check https://docs.saucelabs.com/dev/error-messages
+
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py:209: WebDriverException
+---------------------------- Captured stdout setup -----------------------------
+================ RUNNING TEST: {test_name}
+------------------------------ Captured log setup ------------------------------
+17068 - 21:54:43 - INFO - 1 ==================================== STARTING TEST: test_LoginToPageAndCheckTitle
+17068 - 21:54:43 - INFO - 2 ==================================== STARTING TEST: test_LoginToPageAndCheckTitle
+17068 - 21:54:43 - INFO - 3 ==================================== STARTING TEST: test_LoginToPageAndCheckTitle
+17068 - 21:54:43 - INFO - SAUCELABS SESSION: https://app.saucelabs.com/tests/21383da8810f45d88a06ca610b6fa38d
+17068 - 21:56:27 - INFO - Redirecting https://oauth-wesleyhoang96-6c268:23d77e3d-75ac-4d04-80cf-966f6ab0c98d@ondemand.saucelabs.com/wd/hub/session -> https://oauth-wesleyhoang96-6c268:23d77e3d-75ac-4d04-80cf-966f6ab0c98d@ondemand.saucelabs.com/wd/hub/session/9893e3687a474fb0a79cefff95ca8c5e?ref=fedaea866e7a46439526f4c88cc587c5
+---------------------------- Captured log teardown -----------------------------
+17068 - 21:56:31 - INFO - 1 ==================================== FINISHED TEST: test_LoginToPageAndCheckTitle
+17068 - 21:56:31 - INFO - 2 ==================================== FINISHED TEST: test_LoginToPageAndCheckTitle
+17068 - 21:56:31 - INFO - 3 ==================================== FINISHED TEST: test_LoginToPageAndCheckTitle
+______ ERROR at teardown of TestLogin.test_NavigatingToWorkspacesFromMain ______
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3[gw1] darwin -- Python 3.10.0 /Users/wesleyhoang/Desktop/code/cymate-template/web-template/venv/bin/python3
+
+request = <SubRequest 'driver' for <Function test_signin>>
+
+    @pytest.fixture(scope="session")
+    def driver(request):
+    
+        config = get_config(request)
+        test_name = request.node.name
+    
+        if config["env"] == "saucelabs":
+            _credentials = config["saucelabs_username"]+":"+config["saucelabs_accesskey"]
+            _url = "https://" + _credentials + "@ondemand.saucelabs.com/wd/hub"
+            config["capabilities"]["sauce:options"]["name"] = test_name
+            driver = webdriver.Remote(_url, config["capabilities"])
+        else:
+            chrome_options = Options()
+            chrome_options.add_experimental_option("detach", True)
+            driver = webdriver.Chrome(options=chrome_options)
+    
+        # def quit():
+        #     sauce_result = "passed"
+        #     if request.node.rep_setup.failed:
+        #         sauce_result = "failed"
+        #     elif request.node.rep_setup.passed:
+        #         if request.node.rep_call.failed:
+        #             sauce_result = "failed"
+    
+        #     # sauce_result = "failed" if request.node.rep_call.failed else "passed"
+        #     driver.execute_script("sauce:job-result={}".format(sauce_result))
+        #     driver.quit()
+    
+        base_url = config["base_url"]
+        driver.get(base_url)
+    
+        # request.addfinalizer(quit)
+        yield driver
+>       driver.quit()
+
+src/main/python/company-template/tests/conftest.py:221: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:562: in quit
+    self.execute(Command.QUIT)
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py:440: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x10cfdde70>
+response = {'status': 404, 'value': "ERROR The test with session id a88077216b58490c8f3c0d860a0fa17e has already finished, and ca...labs.com/tests/a88077216b58490c8f3c0d860a0fa17e\nFor help, please check https://docs.saucelabs.com/dev/error-messages"}
+
+    def check_response(self, response: Dict[str, Any]) -> None:
+        """Checks that a JSON response from the WebDriver does not have an
+        error.
+    
+        :Args:
+         - response - The JSON response from the WebDriver server as a dictionary
+           object.
+    
+        :Raises: If the response contains an error message.
+        """
+        status = response.get("status", None)
+        if not status or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen: str = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get("value", None)
+            if value_json and isinstance(value_json, str):
+                import json
+    
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value["value"]
+                    status = value.get("error", None)
+                    if not status:
+                        status = value.get("status", ErrorCode.UNKNOWN_ERROR)
+                        message = value.get("value") or value.get("message")
+                        if not isinstance(message, str):
+                            value = message
+                            message = message.get("message")
+                    else:
+                        message = value.get("message", None)
+                except ValueError:
+                    pass
+    
+        exception_class: Type[WebDriverException]
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_SHADOW_ROOT:
+            exception_class = NoSuchShadowRootException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif (
+            status in ErrorCode.INVALID_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR
+            or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER
+        ):
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = InvalidCookieDomainException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = UnableToSetCookieException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        elif status in ErrorCode.JAVASCRIPT_ERROR:
+            exception_class = JavascriptException
+        elif status in ErrorCode.SESSION_NOT_CREATED:
+            exception_class = SessionNotCreatedException
+        elif status in ErrorCode.INVALID_ARGUMENT:
+            exception_class = InvalidArgumentException
+        elif status in ErrorCode.NO_SUCH_COOKIE:
+            exception_class = NoSuchCookieException
+        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:
+            exception_class = ScreenshotException
+        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:
+            exception_class = ElementClickInterceptedException
+        elif status in ErrorCode.INSECURE_CERTIFICATE:
+            exception_class = InsecureCertificateException
+        elif status in ErrorCode.INVALID_COORDINATES:
+            exception_class = InvalidCoordinatesException
+        elif status in ErrorCode.INVALID_SESSION_ID:
+            exception_class = InvalidSessionIdException
+        elif status in ErrorCode.UNKNOWN_METHOD:
+            exception_class = UnknownMethodException
+        else:
+            exception_class = WebDriverException
+        if not value:
+            value = response["value"]
+        if isinstance(value, str):
+>           raise exception_class(value)
+E           selenium.common.exceptions.WebDriverException: Message: ERROR The test with session id a88077216b58490c8f3c0d860a0fa17e has already finished, and can't receive further commands.
+E           You can learn more at https://app.saucelabs.com/tests/a88077216b58490c8f3c0d860a0fa17e
+E           For help, please check https://docs.saucelabs.com/dev/error-messages
+
+venv/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py:209: WebDriverException
+---------------------------- Captured stdout setup -----------------------------
+================ RUNNING TEST: {test_name}
+------------------------------ Captured log setup ------------------------------
+17069 - 21:54:43 - INFO - 1 ==================================== STARTING TEST: test_NavigatingToWorkspacesFromMain
+17069 - 21:54:43 - INFO - 2 ==================================== STARTING TEST: test_NavigatingToWorkspacesFromMain
+17069 - 21:54:43 - INFO - 3 ==================================== STARTING TEST: test_NavigatingToWorkspacesFromMain
+17069 - 21:54:43 - INFO - SAUCELABS SESSION: https://app.saucelabs.com/tests/a88077216b58490c8f3c0d860a0fa17e
+17069 - 21:56:27 - INFO - Redirecting https://oauth-wesleyhoang96-6c268:23d77e3d-75ac-4d04-80cf-966f6ab0c98d@ondemand.saucelabs.com/wd/hub/session -> https://oauth-wesleyhoang96-6c268:23d77e3d-75ac-4d04-80cf-966f6ab0c98d@ondemand.saucelabs.com/wd/hub/session/2bee34f150744297aa89b4927280df01?ref=81c751f4f4b74303b8d2f74404af38f8
+---------------------------- Captured log teardown -----------------------------
+17069 - 21:56:40 - INFO - 1 ==================================== FINISHED TEST: test_NavigatingToWorkspacesFromMain
+17069 - 21:56:40 - INFO - 2 ==================================== FINISHED TEST: test_NavigatingToWorkspacesFromMain
+17069 - 21:56:40 - INFO - 3 ==================================== FINISHED TEST: test_NavigatingToWorkspacesFromMain
+- generated html file: file:///Users/wesleyhoang/Desktop/code/cymate-template/web-template/test-output/reports/report_2023-02-16_21-54-12.html -
+=========================== short test summary info ============================
+ERROR src/main/python/company-template/tests/testsuite2-functional/test_login_page.py::TestLogin::test_LoginToPageAndCheckTitle
+ERROR src/main/python/company-template/tests/testsuite2-functional/test_main_page.py::TestLogin::test_NavigatingToWorkspacesFromMain
+=================== 10 passed, 2 errors in 147.92s (0:02:27) ===================

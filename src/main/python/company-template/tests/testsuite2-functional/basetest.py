@@ -1,3 +1,5 @@
+import os
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -6,12 +8,24 @@ from utils.utilities import *
 
 class BaseTest:
     def setup_method(self):
-        chrome_options = Options()
-        chrome_options.add_experimental_option("detach", True)
-
         self.config = self.read_config()
-        base_url = get_base_url(self.config)
-        self.driver = webdriver.Chrome(options=chrome_options)
+        test_name = os.environ.get("PYTEST_CURRENT_TEST").split(":")[-1].split(" ")[0]
+
+        if self.config["env"] == "saucelabs":
+            _credentials = (
+                self.config["saucelabs_username"]
+                + ":"
+                + self.config["saucelabs_accesskey"]
+            )
+            _url = "https://" + _credentials + "@ondemand.saucelabs.com/wd/hub"
+            self.config["capabilities"]["sauce:options"]["name"] = test_name
+            self.driver = webdriver.Remote(_url, self.config["capabilities"])
+        else:
+            chrome_options = Options()
+            chrome_options.add_experimental_option("detach", True)
+            self.driver = webdriver.Chrome(options=chrome_options)
+
+        base_url = self.config["base_url"]
         self.driver.get(base_url)
 
     def teardown_method(self):
