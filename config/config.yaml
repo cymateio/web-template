@@ -17,9 +17,12 @@ saucelabs_accesskey: "23d77e3d-75ac-4d04-80cf-966f6ab0c98d"
 
 # CAPABILITIES
 capabilities:
+  # maxInstances: 100
   browserName: "chrome"
   browserVersion: "87.0"
   platformName: "Windows 11"
+  # commandTimeout: 600
+  # maxDuration: 1200
   sauce:options:
     name: "UNNAMED"
 

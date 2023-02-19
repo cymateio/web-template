@@ -90,7 +90,7 @@ def log_testname(request, driver):
 ##################
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def driver(request):
     config = get_config(request)
     test_name = request.node.name
