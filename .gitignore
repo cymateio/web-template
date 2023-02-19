@@ -2,7 +2,7 @@ venv
 .DS_Store
 .pytest_cache
 **/__pycache__/
-**/test-output/logs/*
-**/test-output/results/*
-**/test-output/reports/*
+**/test-output/logs/LOG*
+**/test-output/results/*.log
+**/test-output/reports/*.html
 **/test-output/reports/assets/
