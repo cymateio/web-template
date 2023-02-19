@@ -7,9 +7,14 @@
 ### CREATE A NEW VIRTUAL ENV
 virtualenv venv
 
+### ACTIVATE VIRTUAL ENV
+source venv/bin/activate
+
 ### INSTALLING DEPENDENCIES
 pip3 install -r requirements.txt
 
+### DEACTIVATE VIRTUAL ENV
+deactivate
 
 ### TO REMOVE CURRENT ENV, run: "rm -r venv"
 ### Note that virtualenv is hardcoded with project name, if you rename your project name, you have to reinstall virtualenv and all its dependencies
