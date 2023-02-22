@@ -8,7 +8,7 @@ from utils.utilities import *
 
 
 # TEST SIGNIN PAGE
-@pytest.mark.functional
+@pytest.mark.smoke
 # @pytest.mark.dependency
 def test_signin(driver, logger, config):
     signin_page = Signin(driver)
