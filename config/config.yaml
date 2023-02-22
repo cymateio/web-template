@@ -1,5 +1,5 @@
 # ENVIRONMENT (local/saucelabs)
-env: "saucelabs"
+env: "local"
 
 # GENERAL SETTINGS
 base_url: "https://identity.getpostman.com/login"

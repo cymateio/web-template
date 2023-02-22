@@ -8,7 +8,7 @@ from utils.utilities import *
 def run_tests():
     now = datetime.datetime.now()
     current_time = now.strftime("%Y-%m-%d_%H-%M-%S")
-    report_filename = f"report_{current_time}.html"
+    # report_filename = f"report_{current_time}.html"
 
     user_data = read_config("test-data/user.yaml")
     config_data = read_config("config.yaml")
@@ -28,6 +28,8 @@ def run_tests():
     args = [
         "--numprocesses=" + num_processes,
         "--dist={}".format(distmode),
+        "-m smoke",
+        f"--junitxml=test-output/results/result_{current_time}.xml",
         "-W ignore",
         "-o",
         f"log_cli={log_cli}",
@@ -44,7 +46,7 @@ def run_tests():
         "-o",
         f"log_file_level={log_level}",
         # "-o", "log_file=test-output/logs/" + log_filename,
-        "--html=test-output/reports/" + report_filename,
+        f"--html=test-output/reports/report_{current_time}.html",
         "--confcutdir={}".format(conftest_dir),
         "--log-dir={}".format(log_dir_path),
         "--json-arg={}".format(json.dumps(config)),
